@@ -7,6 +7,14 @@
 * clone 项目到 D:/Docker
 * 创建数据目录 D:/DockerData
 
+## 内置服务
+
+* Nginx
+* PHP
+* Redis
+* MySQL
+* RabbitMQ
+
 ### 启动 Nginx
 
 ```
@@ -41,7 +49,7 @@ docker build -t local/php:5.6-fpm-alpine .
 docker run -d --name php56 --privileged -p 9000:9000 -v D:/Docker/etc/php56/php.ini:/usr/local/etc/php.ini -v D:/Docker/etc/php56/php-fpm.conf:/usr/local/etc/php-fpm.conf -v D:/Docker/etc/php56/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf -v D:/Docker/var/log/php56:/var/log/php -v D:/DockerData/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
 ```
 
-## 主要说明
+## 说明文档
 
 ### 网络
 
