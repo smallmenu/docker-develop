@@ -58,7 +58,7 @@ docker run -d --name mysql57 --privileged -p 3306:3306 -v D:/Docker/etc/mysql57:
 
 ### 手动构建并启动 PHP 7.2 FPM
 
-启动，分别挂载了php.ini、php-fpm.conf、www.conf、日志目录、网站目录。
+挂载了 php.ini、php-fpm.conf、日志目录、网站目录。
 
 注意：网站目录需要和 Nginx 的 root 路径保持一致。
 
@@ -70,7 +70,7 @@ docker run -d --name php72 --privileged -p 9000:9000 -v D:/Docker/etc/php72/php.
 
 ### 手动构建并启动 PHP 5.6 FPM
 
-启动，分别挂载了php.ini、php-fpm.conf、www.conf、日志目录、网站目录。
+挂载了 php.ini、php-fpm.conf、日志目录、网站目录。
 
 注意：网站目录需要和 Nginx 的 root 路径保持一致。
 
