@@ -5,7 +5,7 @@
 * 安装 Docker Desktop Installer
 * 切换为 Linux 容器模式，自行进行 Docker 初始化配置，包括共享目录， docker 镜像源，网络，主机资源等
 * clone 项目到 D:/Docker
-* 创建数据目录 D:/DockerData
+* 创建对应的日志目录 D:/Docker/var/log/xxx 以及数据目录 D:/DockerData
 
 ## 注意事项
 
