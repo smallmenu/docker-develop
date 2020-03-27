@@ -1,0 +1,13 @@
+FROM php:5.6-fpm-alpine
+
+# 替换 alpine 信源
+RUN sed -i "s#dl-cdn.alpinelinux.org#mirrors.aliyun.com#g" /etc/apk/repositories
+
+# docker-php-extension-installer 扩展
+ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
+RUN install-php-extensions bcmath bz2 calendar gettext gd gmp igbinary imagick redis mcrypt memcache mongodb pdo_mysql shmop sockets sysvmsg sysvsem sysvshm zip opcache tidy grpc protobuf rdkafka 
+
+# 工具
+RUN apk add tzdata curl drill && rm -rf /var/cache/apk/*
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' > /etc/timezone
