@@ -30,6 +30,8 @@ location ~ \.php$
 }
 ```
 
+同理你的 PHP 代码中也需要使用 host.docker.internal 作为主机名 host 来连接其他容器服务。
+
 ## 使用方法
 
 ### 启动 Nginx
