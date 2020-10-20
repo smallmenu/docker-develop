@@ -20,7 +20,7 @@ server
 │   ├── mysql57
 │   ├── redis4
 │   └── www  
-└── docker (git clone )
+└── docker (git clone https://github.com/smallmenu/docker-develop.git)
     ├── app
     │   ├── alpine
     │   │   ├── php56
@@ -55,7 +55,7 @@ server
             └── redis4
 ```
 
-## Windows 
+## Windows/Mac 开发环境
 
 Windows 安装 Docker 需要 `Windows 10 64-bit: Pro, Enterprise, or Education (Build 16299 or later).`
 
@@ -63,15 +63,13 @@ Windows 安装 Docker 需要 `Windows 10 64-bit: Pro, Enterprise, or Education (
 
 切换为 Linux 容器模式，自行进行 Docker 初始化配置，包括共享目录， docker 镜像源，网络，主机资源等
 
-## 注意事项
-
 ### docker0
 
 Windows 的 Docker 桌面中没有 docker0，它存在于 Windows 的 Hyper-V 虚拟机中
 
 ### 容器连接主机上的服务
 
-虽然在容器中可以直接 ping 通主机，但是现在不允许直接进行服务通讯。
+虽然在容器中可以直接 ping 通宿主，但是现在不允许直接进行服务通讯。
 
 可以通过 `host.docker.internal` 或 `gateway.docker.internal` 来实现通讯。
 
@@ -88,19 +86,22 @@ location ~ \.php$
 
 同理，你的 PHP 代码中也需要使用 host.docker.internal 作为主机名 host 来连接其他容器服务。
 
+
 ## 使用方法
 
-### 启动 Nginx
+主要挂载配置、日志、数据目录。
+
+### 启动 Nginx 1.19
 
 挂载了主配置文件，额外配置目录，日志目录，网站目录。
 
 ```
 docker run -d --name nginx --privileged -p 80:80 \
--v /data/server/docker/etc/nginx/conf.d:/etc/nginx/conf.d \
--v /data/server/docker/etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
--v /data/server/docker/var/log/nginx:/var/log/nginx \
--v /data/server/data/www:/usr/share/nginx/html \
-nginx:alpine
+-v /data/docker/etc/nginx/conf.d:/etc/nginx/conf.d \
+-v /data/docker/etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
+-v /data/docker/var/log/nginx:/var/log/nginx \
+-v /data/www:/usr/share/nginx/html \
+nginx:1.19-alpine
 ```
 
 ### 启动 Redis4
@@ -109,9 +110,9 @@ nginx:alpine
 
 ```
 docker run -d --name redis4 --privileged -p 6379:6379 \
--v /data/server/docker/etc/redis4/redis.conf:/usr/local/etc/redis/redis.conf \
--v /data/server/docker/var/log/redis4:/var/log/redis \
--v /data/server/data/redis4:/data \
+-v /data/docker/etc/redis4/redis.conf:/usr/local/etc/redis/redis.conf \
+-v /data/docker/var/log/redis4:/var/log/redis \
+-v /data/redis4:/data \
 redis:4-alpine redis-server /usr/local/etc/redis/redis.conf
 ```
 
@@ -121,9 +122,9 @@ redis:4-alpine redis-server /usr/local/etc/redis/redis.conf
 
 ```
 docker run -d --name mysql57 --privileged -p 3306:3306 
--v /data/server/docker/etc/mysql57:/etc/mysql/conf.d 
--v /data/server/docker/var/log/mysql57:/var/log/mysql 
--v /data/server/data/mysql57:/var/lib/mysql 
+-v /data/docker/etc/mysql57:/etc/mysql/conf.d 
+-v /data/docker/var/log/mysql57:/var/log/mysql 
+-v /data/mysql57:/var/lib/mysql
 -e MYSQL_ROOT_PASSWORD=123123 -d mysql:5.7
 ```
 
@@ -138,11 +139,11 @@ cd app/alpine/php72
 docker build -t local/php:7.2-fpm-alpine .
 
 docker run -d --name php72 --privileged -p 9000:9000 \
--v /data/server/docker/etc/php72/php.ini:/usr/local/etc/php.ini \
--v /data/server/docker/etc/php72/php-fpm.conf:/usr/local/etc/php-fpm.conf \
--v /data/server/docker/etc/php72/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
--v /data/server/docker/var/log/php72:/var/log/php \
--v /data/server/data/www:/usr/share/nginx/html local/php:7.2-fpm-alpine
+-v /data/docker/etc/php72/php.ini:/usr/local/etc/php.ini \
+-v /data/docker/etc/php72/php-fpm.conf:/usr/local/etc/php-fpm.conf \
+-v /data/docker/etc/php72/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+-v /data/docker/var/log/php72:/var/log/php \
+-v /data/www:/usr/share/nginx/html local/php:7.2-fpm-alpine
 ```
 
 ### 手动构建并启动 PHP 5.6 FPM
@@ -156,9 +157,9 @@ cd app/alpine/php56
 docker build -t local/php:5.6-fpm-alpine .
 
 docker run -d --name php56 --privileged -p 9001:9000 \
--v /data/server/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
--v /data/server/docker/etc/php56/php-fpm.conf:/usr/local/etc/php-fpm.conf \
--v /data/server/docker/etc/php56/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
--v /data/server/docker/var/log/php56:/var/log/php \
--v /data/server/data/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
+-v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
+-v /data/docker/etc/php56/php-fpm.conf:/usr/local/etc/php-fpm.conf \
+-v /data/docker/etc/php56/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+-v /data/docker/var/log/php56:/var/log/php \
+-v /data/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
 ```
