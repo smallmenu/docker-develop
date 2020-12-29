@@ -1,6 +1,6 @@
 # Docker Develop Environment 
 
-Docker 开发环境 
+Docker 开发环境集成
 
 ## 组件
 
@@ -15,12 +15,12 @@ Docker 开发环境
 推荐的目录结构（自行创建数据目录、日志目录）：
 
 ```
-server
+docker
 ├── data (数据目录、自行创建)
 │   ├── mysql57
 │   ├── redis4
 │   └── www  
-└── docker (git clone https://github.com/smallmenu/docker-develop.git)
+└── image (git clone https://github.com/smallmenu/docker-develop.git)
     ├── app
     │   ├── alpine
     │   │   ├── php56
@@ -65,11 +65,11 @@ Windows 安装 Docker 需要 `Windows 10 64-bit: Pro, Enterprise, or Education (
 
 ### docker0
 
-Windows 的 Docker 桌面中没有 docker0，它存在于 Windows 的 Hyper-V 虚拟机中
+Windows/Mac 的 Docker 桌面中没有 docker0
 
 ### 容器连接主机上的服务
 
-虽然在容器中可以直接 ping 通宿主，但是现在不允许直接进行服务通讯。
+虽然在容器中可以直接 ping 通宿主，但是容器不允许直接与宿主进行服务通讯，因为默认是 bridge 网络。
 
 可以通过 `host.docker.internal` 或 `gateway.docker.internal` 来实现通讯。
 
