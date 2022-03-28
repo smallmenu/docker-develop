@@ -21,7 +21,7 @@ docker
 │   ├── mysql57
 │   ├── redis4
 │   └── www  
-└── image (<font color=#fb0101>`git clone https://github.com/smallmenu/docker-develop.git`</font>)
+└── image (git clone https://github.com/smallmenu/docker-develop.git)
     ├── app
     │   ├── alpine
     │   │   ├── php56
