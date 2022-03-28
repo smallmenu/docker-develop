@@ -1,11 +1,6 @@
 .DS_Store
 .idea
 
-var/log/mysql57/*
-var/log/nginx/*
-var/log/php56/*
-var/log/php72/*
-var/log/rabbitmq/*
-var/log/redis4/*
+var/log/*
 
 etc/nginx/conf.d/*

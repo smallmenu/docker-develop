@@ -4,7 +4,7 @@ FROM php:7.2-fpm-alpine
 RUN sed -i "s#dl-cdn.alpinelinux.org#mirrors.aliyun.com#g" /etc/apk/repositories
 
 # docker-php-extension-installer 扩展
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 RUN install-php-extensions bcmath bz2 calendar gettext gd gmp igbinary pdo_mysql shmop sockets sysvmsg sysvsem sysvshm zip opcache tidy
 RUN install-php-extensions imagick redis mcrypt 

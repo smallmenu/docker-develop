@@ -8,6 +8,7 @@ Docker 开发环境集成
 * PHP 5.6/7.2
 * MySQL 5.7
 * Redis 4/5/6
+* RabbitMQ
 ```
 
 ## 快速开始
@@ -128,6 +129,24 @@ docker run -d --name mysql57 --privileged -p 3306:3306
 -e MYSQL_ROOT_PASSWORD=123123 -d mysql:5.7
 ```
 
+### 手动构建并启动 PHP 7.4 FPM
+
+挂载了 php.ini、php-fpm.conf、日志目录、网站目录。
+
+注意：网站目录需要和 Nginx 的 root 路径保持一致。
+
+```
+cd app/alpine/php74
+docker build -t local/php:7.4-fpm-alpine .
+
+docker run -d --name php74 --privileged -p 9000:9000 \
+-v /data/docker/etc/php74/php.ini:/usr/local/etc/php.ini \
+-v /data/docker/etc/php74/php-fpm.conf:/usr/local/etc/php-fpm.conf \
+-v /data/docker/etc/php74/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+-v /data/docker/var/log/php74:/var/log/php \
+-v /data/www:/usr/share/nginx/html local/php:7.4-fpm-alpine
+```
+
 ### 手动构建并启动 PHP 7.2 FPM
 
 挂载了 php.ini、php-fpm.conf、日志目录、网站目录。
@@ -156,10 +175,18 @@ docker run -d --name php72 --privileged -p 9000:9000 \
 cd app/alpine/php56
 docker build -t local/php:5.6-fpm-alpine .
 
-docker run -d --name php56 --privileged -p 9001:9000 \
+docker run -d --name php56 --privileged -p 9000:9000 \
 -v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
 -v /data/docker/etc/php56/php-fpm.conf:/usr/local/etc/php-fpm.conf \
 -v /data/docker/etc/php56/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
 -v /data/docker/var/log/php56:/var/log/php \
 -v /data/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
 ```
+
+## 启动 RabbitMQ 3.7 
+
+```
+docker run -d --name rabbitmq3 --privileged -p 9001:9000 \
+-e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password \
+-v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
+rabbitmq:3.7-management-alpine
