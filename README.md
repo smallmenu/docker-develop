@@ -21,7 +21,7 @@ docker
 │   ├── mysql57
 │   ├── redis4
 │   └── www  
-└── image (git clone https://github.com/smallmenu/docker-develop.git)
+└── image (<font color=#fb0101>`git clone https://github.com/smallmenu/docker-develop.git`</font>)
     ├── app
     │   ├── alpine
     │   │   ├── php56
@@ -122,10 +122,10 @@ redis:4-alpine redis-server /usr/local/etc/redis/redis.conf
 配置外部配置文件，以及数据目录
 
 ```
-docker run -d --name mysql57 --privileged -p 3306:3306 
--v /data/docker/etc/mysql57:/etc/mysql/conf.d 
--v /data/docker/var/log/mysql57:/var/log/mysql 
--v /data/mysql57:/var/lib/mysql
+docker run -d --name mysql57 --privileged -p 3306:3306 \
+-v /data/docker/etc/mysql57:/etc/mysql/conf.d \
+-v /data/docker/var/log/mysql57:/var/log/mysql \
+-v /data/mysql57:/var/lib/mysql \
 -e MYSQL_ROOT_PASSWORD=123123 -d mysql:5.7
 ```
 
@@ -190,3 +190,4 @@ docker run -d --name rabbitmq37 --privileged -p 9001:9000 \
 -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password \
 -v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
 rabbitmq:3.7-management-alpine
+```
