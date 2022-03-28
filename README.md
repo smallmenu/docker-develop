@@ -8,7 +8,7 @@ Docker 开发环境集成
 * PHP 5.6/7.2
 * MySQL 5.7
 * Redis 4/5/6
-* RabbitMQ
+* RabbitMQ 3.7
 ```
 
 ## 快速开始
@@ -186,7 +186,7 @@ docker run -d --name php56 --privileged -p 9000:9000 \
 ## 启动 RabbitMQ 3.7 
 
 ```
-docker run -d --name rabbitmq3 --privileged -p 9001:9000 \
+docker run -d --name rabbitmq37 --privileged -p 9001:9000 \
 -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password \
 -v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
 rabbitmq:3.7-management-alpine
