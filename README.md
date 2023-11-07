@@ -126,7 +126,9 @@ docker run -d --name mysql57 --privileged -p 3306:3306 \
 -v /data/docker/etc/mysql57:/etc/mysql/conf.d \
 -v /data/docker/var/log/mysql57:/var/log/mysql \
 -v /data/mysql57:/var/lib/mysql \
--e MYSQL_ROOT_PASSWORD=123123 -d mysql:5.7
+-e MYSQL_ROOT_PASSWORD=123123 \
+-e TZ='Asia/Shanghai' \
+-d mysql:5.7
 ```
 
 ### 手动构建并启动 PHP 7.4 FPM
