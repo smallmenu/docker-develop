@@ -5,7 +5,7 @@ Docker 开发环境集成
 ## 组件
 
 ```
-* PHP 5.6/7.2
+* PHP 5.6/7.4
 * MySQL 5.7
 * Redis 4/5/6
 * RabbitMQ 3.7
@@ -26,7 +26,7 @@ docker
     │   ├── alpine
     │   │   ├── php56
     │   │   │   └── Dockerfile
-    │   │   └── php72
+    │   │   └── php74
     │   │       └── Dockerfile
     │   └── debian
     │       └── sources.list
@@ -41,7 +41,7 @@ docker
     │   │   ├── php-fpm.d
     │   │   │   └── www.conf
     │   │   └── php.ini
-    │   ├── php72
+    │   ├── php74
     │   │   ├── php-fpm.conf
     │   │   ├── php-fpm.d
     │   │   │   └── www.conf
@@ -52,7 +52,7 @@ docker
         └── log
             ├── nginx
             ├── php56
-            ├── php72
+            ├── php74
             └── redis4
 ```
 
@@ -156,15 +156,15 @@ docker run -d --name php74 --privileged -p 9000:9000 \
 注意：网站目录需要和 Nginx 的 root 路径保持一致。
 
 ```
-cd app/alpine/php72
-docker build -t local/php:7.2-fpm-alpine .
+cd app/alpine/php74
+docker build -t local/php:7.4-fpm-alpine .
 
-docker run -d --name php72 --privileged -p 9000:9000 \
--v /data/docker/etc/php72/php.ini:/usr/local/etc/php.ini \
--v /data/docker/etc/php72/php-fpm.conf:/usr/local/etc/php-fpm.conf \
--v /data/docker/etc/php72/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
--v /data/docker/var/log/php72:/var/log/php \
--v /data/www:/usr/share/nginx/html local/php:7.2-fpm-alpine
+docker run -d --name php74 --privileged -p 9000:9000 \
+-v /data/docker/etc/php74/php.ini:/usr/local/etc/php.ini \
+-v /data/docker/etc/php74/php-fpm.conf:/usr/local/etc/php-fpm.conf \
+-v /data/docker/etc/php74/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+-v /data/docker/var/log/php74:/var/log/php \
+-v /data/www:/usr/share/nginx/html local/php:7.4-fpm-alpine
 ```
 
 ### 手动构建并启动 PHP 5.6 FPM
