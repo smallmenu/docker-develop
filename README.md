@@ -8,7 +8,7 @@ Docker 开发环境集成
 * PHP 5.6/7.4
 * MySQL 5.7
 * Redis 4/5/6
-* RabbitMQ 3.7
+* RabbitMQ 3.9
 ```
 
 ## 快速开始
@@ -149,7 +149,7 @@ docker run -d --name php74 --privileged -p 9000:9000 \
 -v /data/www:/usr/share/nginx/html local/php:7.4-fpm-alpine
 ```
 
-### 手动构建并启动 PHP 7.2 FPM
+### 手动构建并启动 PHP 7.4 FPM
 
 挂载了 php.ini、php-fpm.conf、日志目录、网站目录。
 
@@ -185,11 +185,11 @@ docker run -d --name php56 --privileged -p 9000:9000 \
 -v /data/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
 ```
 
-## 启动 RabbitMQ 3.7 
+## 启动 RabbitMQ 3.9
 
 ```
-docker run -d --name rabbitmq37 --privileged -p 9001:9000 \
+docker run -d --name rabbitmq39 --privileged -p 9001:9000 \
 -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password \
 -v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
-rabbitmq:3.7-management-alpine
+rabbitmq:3.9-management-alpine
 ```
