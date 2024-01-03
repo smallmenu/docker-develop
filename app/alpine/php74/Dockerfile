@@ -7,7 +7,7 @@ RUN sed -i "s#dl-cdn.alpinelinux.org#mirrors.aliyun.com#g" /etc/apk/repositories
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 RUN install-php-extensions bcmath bz2 calendar gettext gd gmp igbinary pdo_mysql shmop sockets sysvmsg sysvsem sysvshm zip opcache tidy
-RUN install-php-extensions imagick redis mcrypt grpc lz4 protobuf uploadprogress yaml uuid 
+RUN install-php-extensions imagick redis mcrypt grpc lz4 protobuf uploadprogress yaml uuid mongodb
 
 # 工具
 RUN apk add tzdata curl drill && rm -rf /var/cache/apk/*

@@ -184,12 +184,3 @@ docker run -d --name php56 --privileged -p 9000:9000 \
 -v /data/docker/var/log/php56:/var/log/php \
 -v /data/www:/usr/share/nginx/html local/php:5.6-fpm-alpine
 ```
-
-## 启动 RabbitMQ 3.9
-
-```
-docker run -d --name rabbitmq39 --privileged -p 9001:9000 \
--e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password \
--v /data/docker/etc/php56/php.ini:/usr/local/etc/php.ini \
-rabbitmq:3.9-management-alpine
-```
